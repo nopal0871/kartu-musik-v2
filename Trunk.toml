@@ -2,7 +2,7 @@
 target = "index.html"
 dist = "dist"
 filehash = true
-public_url = "/"
+public_url = "/kartu-musik-v2/"
 
 [serve]
 port = 8080
