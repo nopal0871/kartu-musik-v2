@@ -1,7 +1,6 @@
-use linkme::distributed_slice;
 use web_sys::CanvasRenderingContext2d;
 
-use super::{FieldId, MusicTemplate, Orientation, RenderState, REGISTERED};
+use super::{FieldId, MusicTemplate, Orientation, RenderState};
 use crate::renderer::drawing::*;
 
 pub struct IgTemplate;
@@ -102,6 +101,3 @@ impl MusicTemplate for IgTemplate {
         let _ = ctx.fill_text("Putar di Instagram", bx + btn_w / 2.0, btn_y + btn_h / 2.0);
     }
 }
-
-#[distributed_slice(REGISTERED)]
-static _REG: fn() -> Box<dyn MusicTemplate> = || Box::new(IgTemplate);
