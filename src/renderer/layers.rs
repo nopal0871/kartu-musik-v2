@@ -78,14 +78,14 @@ impl LayeredRenderer {
         template.render_dynamic(&self.dynamic_ctx, self.width as f64, self.height as f64, state);
 
         target.clear_rect(0.0, 0.0, self.width as f64, self.height as f64);
-        target.draw_image_with_html_canvas_element_and_dw_dh(
+        target.draw_image_with_html_canvas_element_and_dw_and_dh(
             &self.static_canvas,
             0.0,
             0.0,
             self.width as f64,
             self.height as f64,
         )?;
-        target.draw_image_with_html_canvas_element_and_dw_dh(
+        target.draw_image_with_html_canvas_element_and_dw_and_dh(
             &self.dynamic_canvas,
             0.0,
             0.0,
