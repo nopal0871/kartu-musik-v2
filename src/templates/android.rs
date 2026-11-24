@@ -1,7 +1,6 @@
-//use linkme::distributed_slice;
 use web_sys::CanvasRenderingContext2d;
 
-use super::{FieldId, MusicTemplate, Orientation, RenderState, REGISTERED};
+use super::{FieldId, MusicTemplate, Orientation, RenderState};
 use crate::renderer::drawing::*;
 
 pub struct AndroidTemplate;
@@ -77,6 +76,3 @@ fn fmt_time(t: f64) -> String {
     let t = t.max(0.0) as u32;
     format!("{}:{:02}", t / 60, t % 60)
 }
-
-#[distributed_slice(REGISTERED)]
-static _REG: fn() -> Box<dyn MusicTemplate> = || Box::new(AndroidTemplate);
