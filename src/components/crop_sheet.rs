@@ -70,7 +70,7 @@ pub fn CropSheet(
         let Some(img) = img_ref.get() else { return };
 
         let v_node: &HtmlElement = v.as_ref();
-        let view_rect = v_node.get_bounding_client_rect();
+        let view_rect = v_node.unchecked_ref::<web_sys::Element>().get_bounding_client_rect();
 
         let img_node: &HtmlElement = img.as_ref();
         let img_el: HtmlImageElement = img_node.clone().unchecked_into();
@@ -111,7 +111,8 @@ pub fn CropSheet(
             .unwrap()
             .dyn_into::<web_sys::CanvasRenderingContext2d>()
             .unwrap();
-        ctx.draw_image_with_html_image_element_and_sw_sh_and_dw_dh(
+            
+        ctx.draw_image_with_html_image_element_and_sw_and_sh_and_dx_and_dy_and_dw_and_dh(
             &img_el,
             sx,
             sy,
@@ -130,8 +131,14 @@ pub fn CropSheet(
         let open_cb = open;
         let canvas_owned = canvas.clone();
         spawn_local(async move {
-            let promise = canvas_owned.convert_to_blob().ok();
-            let Some(promise) = promise else { return };
+            let promise = js_sys::Promise::new(&mut |resolve, _| {
+                let callback = Closure::once(move |blob: Option<web_sys::Blob>| {
+                    resolve.call1(&JsValue::UNDEFINED, &blob.into()).ok();
+                });
+                canvas_owned.to_blob(callback.as_ref().unchecked_ref()).ok();
+                callback.forget();
+            });
+            
             let blob_js = wasm_bindgen_futures::JsFuture::from(promise).await.ok();
             let Some(blob) = blob_js.and_then(|b| b.dyn_into::<web_sys::Blob>().ok()) else {
                 return;
@@ -229,4 +236,4 @@ pub fn CropSheet(
             </div>
         </Show>
     }
-}
+                    }
