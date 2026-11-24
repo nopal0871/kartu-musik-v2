@@ -31,7 +31,7 @@ pub fn draw_theme_background(ctx: &CanvasRenderingContext2d, w: f64, h: f64, the
     let _ = ctx.fill_rect(0.0, 0.0, w, h);
 
     if let Some(bg) = theme.background.as_deref() {
-        let _ = ctx.draw_image_with_image_bitmap_and_dw_dh(bg, 0.0, 0.0, w, h);
+        let _ = ctx.draw_image_with_image_bitmap_and_dw_and_dh(bg, 0.0, 0.0, w, h);
     }
 
     ctx.set_fill_style_str(&format!("rgba(0,0,0,{})", theme.dim));
@@ -51,7 +51,7 @@ pub fn draw_rounded_image(
     rounded_rect(ctx, x, y, w, h, r);
     ctx.clip();
     if let Some(bm) = art {
-        let _ = ctx.draw_image_with_image_bitmap_and_dw_dh(bm, x, y, w, h);
+        let _ = ctx.draw_image_with_image_bitmap_and_dw_and_dh(bm, x, y, w, h);
     } else {
         ctx.set_fill_style_str("#444");
         let _ = ctx.fill_rect(x, y, w, h);
