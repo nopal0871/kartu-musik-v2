@@ -89,7 +89,7 @@ impl AudioController {
         if buf.len() < n {
             buf.resize(n, 0);
         }
-        analyser.get_byte_frequency_data(&mut buf[..n]).ok();
+        analyser.get_byte_frequency_data(&mut buf[..n]);
         out.reserve(n);
         for &v in &buf[..n] {
             out.push(v as f32 / 255.0);
