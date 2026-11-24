@@ -55,7 +55,7 @@ pub async fn export(
     src.connect_with_audio_node(&dest)?;
     let audio_stream = dest.stream();
 
-    let stream = canvas.capture_stream_with_frame_rate(opts.fps as f64)?;
+    let stream = canvas.capture_stream_with_frame_request_rate(opts.fps as f64)?;
     let audio_tracks = audio_stream.get_audio_tracks();
     for i in 0..audio_tracks.length() {
         if let Ok(t) = audio_tracks.get(i).dyn_into::<MediaStreamTrack>() {
@@ -69,9 +69,10 @@ pub async fn export(
     let chunks: Rc<RefCell<Vec<Blob>>> = Rc::new(RefCell::new(Vec::new()));
     let chunks_cb = chunks.clone();
     let on_data = Closure::<dyn FnMut(BlobEvent)>::new(move |e: BlobEvent| {
-        let data = e.data();
-        if data.size() > 0.0 {
-            chunks_cb.borrow_mut().push(data);
+        if let Some(data) = e.data() {
+            if data.size() > 0.0 {
+                chunks_cb.borrow_mut().push(data);
+            }
         }
     });
     recorder.set_ondataavailable(Some(on_data.as_ref().unchecked_ref()));
