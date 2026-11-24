@@ -27,7 +27,7 @@ pub fn draw_theme_background(ctx: &CanvasRenderingContext2d, w: f64, h: f64, the
     let grad = ctx.create_linear_gradient(0.0, 0.0, 0.0, h);
     grad.add_color_stop(0.0, &theme.bg_top).ok();
     grad.add_color_stop(1.0, &theme.bg_bottom).ok();
-    ctx.set_fill_style(&grad.into());
+    ctx.set_fill_style_canvas_gradient(&grad);
     let _ = ctx.fill_rect(0.0, 0.0, w, h);
 
     if let Some(bg) = theme.background.as_deref() {
@@ -64,7 +64,7 @@ pub fn draw_glass_card(ctx: &CanvasRenderingContext2d, x: f64, y: f64, w: f64, h
     grad.add_color_stop(0.0, "rgba(255,255,255,0.34)").ok();
     grad.add_color_stop(0.55, "rgba(255,255,255,0.13)").ok();
     grad.add_color_stop(1.0, "rgba(255,255,255,0.08)").ok();
-    ctx.set_fill_style(&grad.into());
+    ctx.set_fill_style_canvas_gradient(&grad);
     rounded_rect(ctx, x, y, w, h, r);
     let _ = ctx.fill();
 
@@ -223,4 +223,4 @@ pub fn draw_glyph_button(
         }
     }
     ctx.restore();
-}
+                        }
