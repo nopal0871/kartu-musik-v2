@@ -1,17 +1,16 @@
-[package]
-name = "kartu-musik"
-version = "0.1.0"
-edition = "2021"
+# Cargo.toml
 
 [dependencies]
 leptos = { version = "0.6", features = ["csr"] }
 wasm-bindgen = "0.2"
 wasm-bindgen-futures = "0.4"
 js-sys = "0.3"
-gloo = { version = "0.11", features = ["events","timers","file","storage"] }
 console_error_panic_hook = "0.1"
-web-time = "1"
-linkme = "0.3"
+
+# Hapus linkme, gloo, dan web-time karena tidak dipakai atau tidak kompatibel
+# linkme = "0.3" 
+# gloo = { version = "0.11", features = ["events","timers","file","storage"] }
+# web-time = "1"
 
 [dependencies.web-sys]
 version = "0.3"
@@ -24,12 +23,9 @@ features = [
   "MediaStream","MediaStreamTrack","MediaRecorder","MediaRecorderOptions",
   "AudioContext","AudioBuffer","AudioBufferSourceNode","AudioNode",
   "MediaStreamAudioDestinationNode","AnalyserNode","MediaStreamAudioSourceNode",
+  # TAMBAHKAN FITUR INI UNTUK AUDIO:
+  "MediaElementAudioSourceNode", 
+  "HtmlMediaElement",
+  "AudioDestinationNode",
   "Event","MouseEvent","PointerEvent","WheelEvent"
 ]
-
-[profile.release]
-opt-level = "z"
-lto = true
-codegen-units = 1
-panic = "abort"
-strip = true
