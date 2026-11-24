@@ -1,5 +1,5 @@
 [package]
-name = "kartu-musik-v2"
+name = "kartu-musik"
 version = "0.1.0"
 edition = "2021"
 
@@ -13,14 +13,23 @@ console_error_panic_hook = "0.1"
 [dependencies.web-sys]
 version = "0.3"
 features = [
-  "Window", "Document", "Element", "HtmlElement", "HtmlCanvasElement",
-  "HtmlInputElement", "HtmlAudioElement", "HtmlVideoElement", "HtmlButtonElement",
-  "HtmlImageElement", "HtmlDivElement",
-  "CanvasRenderingContext2d", "CanvasGradient", "TextMetrics",
-  "ImageBitmap", "Blob", "BlobEvent", "BlobPropertyBag", "Url", "File", "FileList",
-  "FileReader", "MediaStream", "MediaStreamTrack", "MediaRecorder",
-  "MediaRecorderOptions", "AudioContext", "AudioBuffer", "AudioBufferSourceNode",
-  "AudioNode", "MediaStreamAudioDestinationNode", "AnalyserNode",
-  "MediaStreamAudioSourceNode", "MediaElementAudioSourceNode", "HtmlMediaElement",
-  "AudioDestinationNode", "Event", "MouseEvent", "PointerEvent", "WheelEvent"
+  "Window","Document","Element","HtmlElement","HtmlCanvasElement",
+  "HtmlInputElement","HtmlAudioElement","HtmlVideoElement","HtmlButtonElement",
+  "HtmlImageElement","HtmlDivElement",
+  "CanvasRenderingContext2d","CanvasGradient","TextMetrics",
+  "ImageBitmap","Blob","BlobEvent","BlobPropertyBag","Url","File","FileList","FileReader",
+  "MediaStream","MediaStreamTrack","MediaRecorder","MediaRecorderOptions",
+  "AudioContext","AudioBuffer","AudioBufferSourceNode","AudioNode",
+  "MediaStreamAudioDestinationNode","AnalyserNode","MediaStreamAudioSourceNode",
+  "MediaElementAudioSourceNode", 
+  "HtmlMediaElement",
+  "AudioDestinationNode",
+  "Event","MouseEvent","PointerEvent","WheelEvent"
 ]
+
+[profile.release]
+opt-level = "z"
+lto = true
+codegen-units = 1
+panic = "abort"
+strip = true
