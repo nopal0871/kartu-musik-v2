@@ -21,7 +21,7 @@ features = [
   "MediaStream","MediaStreamTrack","MediaRecorder","MediaRecorderOptions",
   "AudioContext","AudioBuffer","AudioBufferSourceNode","AudioNode",
   "MediaStreamAudioDestinationNode","AnalyserNode","MediaStreamAudioSourceNode",
-  "MediaElementAudioSourceNode", 
+  "MediaElementAudioSourceNode",
   "HtmlMediaElement",
   "AudioDestinationNode",
   "Event","MouseEvent","PointerEvent","WheelEvent",
@@ -30,7 +30,10 @@ features = [
 
 [profile.release]
 opt-level = "z"
-lto = true
+lto = "fat"
 codegen-units = 1
 panic = "abort"
 strip = true
+overflow-checks = false
+debug = false
+incremental = false
