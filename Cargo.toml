@@ -24,7 +24,8 @@ features = [
   "MediaElementAudioSourceNode", 
   "HtmlMediaElement",
   "AudioDestinationNode",
-  "Event","MouseEvent","PointerEvent","WheelEvent"
+  "Event","MouseEvent","PointerEvent","WheelEvent",
+  "DomRect"
 ]
 
 [profile.release]
