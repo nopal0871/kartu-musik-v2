@@ -1,6 +1,5 @@
 use std::rc::Rc;
 
-use leptos::ev::event_target_value;
 use leptos::*;
 use wasm_bindgen::prelude::*;
 use wasm_bindgen::JsCast;
@@ -430,4 +429,4 @@ pub fn Dashboard(
             on_apply=on_bg_apply
         />
     }
-}
+                }
