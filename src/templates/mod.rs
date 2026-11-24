@@ -1,4 +1,4 @@
-use linkme::distributed_slice;
+//use linkme::distributed_slice;
 use web_sys::{CanvasRenderingContext2d, ImageBitmap};
 
 use crate::theme::Theme;
@@ -80,8 +80,8 @@ pub trait MusicTemplate: Send + Sync + 'static {
     }
 }
 
-#[distributed_slice]
-pub static REGISTERED: [fn() -> Box<dyn MusicTemplate>];
+//#[distributed_slice]
+//pub static REGISTERED: [fn() -> Box<dyn MusicTemplate>];
 
 pub struct TemplateRegistry {
     templates: Vec<Box<dyn MusicTemplate>>,
