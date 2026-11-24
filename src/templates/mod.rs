@@ -1,4 +1,3 @@
-//use linkme::distributed_slice;
 use web_sys::{CanvasRenderingContext2d, ImageBitmap};
 
 use crate::theme::Theme;
@@ -80,17 +79,17 @@ pub trait MusicTemplate: Send + Sync + 'static {
     }
 }
 
-//#[distributed_slice]
-//pub static REGISTERED: [fn() -> Box<dyn MusicTemplate>];
-
 pub struct TemplateRegistry {
     templates: Vec<Box<dyn MusicTemplate>>,
 }
 
 impl TemplateRegistry {
     pub fn new() -> Self {
-        let templates: Vec<Box<dyn MusicTemplate>> =
-            REGISTERED.iter().map(|f| f()).collect();
+        let templates: Vec<Box<dyn MusicTemplate>> = vec![
+            Box::new(android::AndroidTemplate),
+            Box::new(ios_glass::IosGlassTemplate),
+            Box::new(ig::IgTemplate),
+        ];
 
         #[cfg(debug_assertions)]
         {
